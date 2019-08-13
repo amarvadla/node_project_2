@@ -1,5 +1,6 @@
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema
+var _ = require('lodash')
 
 var likesSchema = Schema({
     userId: {
@@ -33,6 +34,26 @@ var feeds = Schema({
     likes: [likesSchema],
     comments: [commentsSchema]
 })
+
+feeds.methods.simpleObj = function () {
+    var obj = this.toObject();
+
+    //Rename fields
+    obj.id = obj._id;
+    delete obj._id;
+
+    for (var i = 0; i < obj.likes.length; i++) {
+        obj.likes[i].id = obj.likes[i]._id;
+        delete obj.likes[i]._id
+    }
+
+    for (var i = 0; i < obj.comments.length; i++) {
+        obj.comments[i].id = obj.comments[i]._id;
+        delete obj.comments[i]._id
+    }
+
+    return obj;
+}
 
 var feedsModel = mongoose.model('feeds', feeds);
 
