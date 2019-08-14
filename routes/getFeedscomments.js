@@ -14,10 +14,21 @@ router.get('/', (req, res) => {
                 if (err) {
                     res.json({ statusCode: 0, statusMessage: 'wrong feed id' })
                 } else if (dataObj) {
+
+                    var commentsArray = []
+                    for (var i = 0; i < dataObj.comments.length; i++) {
+                        var resObj = {}
+                        resObj.id = dataObj.comments[i]._id
+                        resObj.comment = dataObj.comments[i].comment
+                        resObj.userName = data.username
+
+                        commentsArray.push(resObj)
+                    }
+
                     res.json({
                         statusCode: 1,
                         statusMessage: 'success',
-                        data: dataObj.comments
+                        data: commentsArray
                     })
                 }
             })
