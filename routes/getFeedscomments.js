@@ -20,7 +20,9 @@ router.get('/', (req, res) => {
                         var resObj = {}
                         resObj.id = dataObj.comments[i]._id
                         resObj.comment = dataObj.comments[i].comment
-                        resObj.userName = data.username
+                        userSchema.findById({ _id: dataObj.comments[i].userId }, (err, data) => {
+                            resObj.username = data.username
+                        })
 
                         commentsArray.push(resObj)
                     }
