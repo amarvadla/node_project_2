@@ -8,7 +8,9 @@ app.use('/rest/loginUser', require('./routes/loginUser'))
 app.use('/rest/postFeed', require('./routes/postFeed'))
 app.use('/rest/postFeedComment', require('./routes/postFeedComment'))
 app.use('/rest/getFeedsComments' , require('./routes/getFeedscomments'))
-
+app.use('/rest/postFeedLike' , require('./routes/postFeedLike'))
+app.use('/rest/getFeeds' , require('./routes/getFeedsById'))
+app.use('/rest/getFeedLikes' , require('./routes/getFeedLikes'))
 
 app.use(function (req, res, next) {
   let err = new Error('Not Found');

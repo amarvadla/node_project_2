@@ -2,6 +2,7 @@ var express = require('express')
 var router = express.Router()
 var feeds = require('../schemas/feeds')
 var userSchema = require('../schemas/userSchema')
+var ObjectId = require('mongodb').ObjectID;
 
 router.get('/', (req, res) => {
     var input = req.query
@@ -10,17 +11,51 @@ router.get('/', (req, res) => {
         if (err) {
             res.json({ statusCode: 0, statusMessage: 'wrong user id' })
         } else if (data) {
-            feeds.findById({ _id: input.feedId }, (err, dataObj) => {
-                if (err) {
-                    res.json({ statusCode: 0, statusMessage: 'wrong feed id' })
-                } else if (dataObj) {
-                    res.json({
-                        statusCode: 1,
-                        statusMessage: 'success',
-                        data: dataObj.comments
-                    })
+            // feeds.findById({ _id: input.feedId }, (err, dataObj) => {
+            //     if (err) {
+            //         res.json({ statusCode: 0, statusMessage: 'wrong feed id' })
+            //     } else if (dataObj) {
+
+
+            //     }
+            // })
+
+
+            feeds.aggregate([{ $match: { _id: ObjectId(input.feedId) } },
+            { "$unwind": "$comments" },
+            { $replaceRoot: { newRoot: "$comments" } },
+            { $lookup: { from: "userschemas", localField: "userId", foreignField: "_id", as: "userObj" } },
+            { "$unwind": "$userObj" },
+            {
+                $project: {
+                    commentId: "$_id", userId: "$userObj._id",
+                    username: "$userObj.username"
                 }
+            }
+            ]).exec(function (err, data) {
+                // if (err) {
+                //     console.log(err)
+                // }
+                // var dataObj = data[0]
+                // var commentsArray = []
+                // for (var i = 0; i < dataObj.comments.length; i++) {
+                //     var resObj = {}
+                //     resObj.id = dataObj.comments[i]._id
+                //     resObj.comment = dataObj.comments[i].comment
+                //     resObj.username = dataObj.userObj.username
+
+                //     commentsArray.push(resObj)
+                // }
+
+
+                res.json({
+                    statusCode: 1,
+                    statusMessage: 'success',
+                    data: data
+                })
             })
+
+
         }
     })
 
