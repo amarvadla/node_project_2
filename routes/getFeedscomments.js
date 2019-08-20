@@ -21,15 +21,15 @@ router.get('/', (req, res) => {
             // })
 
 
-            feeds.aggregate([{ $match: { _id: ObjectId("5d4bcf9126bc8328dc3f9af5") } },
-             { "$unwind": "$comments" },
-             { $replaceRoot: { newRoot: "$comments" } },
+            feeds.aggregate([{ $match: { _id: ObjectId(input.feedId) } },
+            { "$unwind": "$comments" },
+            { $replaceRoot: { newRoot: "$comments" } },
             { $lookup: { from: "userschemas", localField: "userId", foreignField: "_id", as: "userObj" } },
             { "$unwind": "$userObj" },
             {
                 $project: {
-                    commentId: "$_id", _id: 0, comment: 1, userId: 1,
-                    profileImage: "$userObj.password"
+                    commentId: "$_id", userId: "$userObj._id",
+                    username: "$userObj.username"
                 }
             }
             ]).exec(function (err, data) {
