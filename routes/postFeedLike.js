@@ -5,7 +5,6 @@ var userSchema = require('../schemas/userSchema')
 
 router.post('/', (req, res) => {
     var input = req.body
-<<
     userSchema.findById({ _id: input.userId }, (err, data) => {
         if (err) {
             res.json({ statusCode: 0, statusMessage: 'wrong userId' })

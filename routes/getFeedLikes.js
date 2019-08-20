@@ -27,7 +27,8 @@ router.get('/', (req, res) => {
                     $project: {
                         commentID: '$_id',
                         userId: '$userId',
-                        userName: '$userObj.username'
+                        userName: '$userObj.username',
+                        _id : 0
                     }
                 }]).exec((err, data) => {
                     res.json({
