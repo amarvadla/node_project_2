@@ -6,10 +6,10 @@
 // var logger = require('../logger')
 var cluster = require('cluster')
 var numCPUs = require('os').cpus().length
- console.log("Welcome to wwww")
+console.log("Welcome to wwww")
 var envlet = process.env.APP_ENVIRONMENT
 if (envlet && cluster.isMaster) {
-//   logger.debug(`Master ${process.pid} is running`)
+  //   logger.debug(`Master ${process.pid} is running`)
   for (var i = 0; i < numCPUs; i++) {
     cluster.fork()
   }
@@ -23,6 +23,7 @@ if (envlet && cluster.isMaster) {
     // logger.debug('Worker started with PID ' + worker.process.pid + '.')
   })
 } else {
-//   logger.debug('App loaded by PID ' + process.pid)
+  //   logger.debug('App loaded by PID ' + process.pid)
   require('./connection')
+  // require('./jobs')
 }
