@@ -11,6 +11,8 @@ app.use('/rest/getFeedsComments' , require('./routes/getFeedscomments'))
 app.use('/rest/postFeedLike' , require('./routes/postFeedLike'))
 app.use('/rest/getFeeds' , require('./routes/getFeedsById'))
 app.use('/rest/getFeedLikes' , require('./routes/getFeedLikes'))
+app.use('/rest/postCelebDetails' , require('./routes/postCelebDetails'))
+app.use('/rest/getTotalCelebs' , require('./routes/getTrendingCelebs'))
 
 app.use(function (req, res, next) {
   let err = new Error('Not Found');

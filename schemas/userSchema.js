@@ -27,7 +27,7 @@ var userSchema = schema({
             required: true
         }
     }]
-})
+}, {versionKey : false , collection : 'userSchema'})
 
 
 userSchema.methods.generateAuthToken = function () {
