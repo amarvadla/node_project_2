@@ -13,6 +13,9 @@ app.use('/rest/getFeeds' , require('./routes/getFeedsById'))
 app.use('/rest/getFeedLikes' , require('./routes/getFeedLikes'))
 app.use('/rest/postCelebDetails' , require('./routes/postCelebDetails'))
 app.use('/rest/getTotalCelebs' , require('./routes/getTrendingCelebs'))
+app.use('/rest/createMasterLiveStream' , require('./routes/createMasterLiveStream'))
+app.use('/rest/createLiveStreamContest' , require('./routes/createLiveStreamContest'))
+app.use('/rest/getStreamDetails' , require('./routes/getLiveStreamDetails'))
 
 app.use(function (req, res, next) {
   let err = new Error('Not Found');
