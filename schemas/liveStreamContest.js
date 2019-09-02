@@ -3,63 +3,62 @@ const Schema = mongoose.Schema
 
 const optionsSchema = Schema({
 
-    optionValue : {
-        type : String
+    optionValue: {
+        type: String
     },
-    count : {
-        type : Number
+    count: {
+        type: Number
     },
-    isParticipated : {
-        type : Boolean
-    }
+
+    participants: [Schema.Types.ObjectId]
 
 })
 
 const questionSchema = Schema({
-    questionTime : {
-        type : Number
+    questionTime: {
+        type: Number
     },
-    bufferTime : {
-        type : Number
+    bufferTime: {
+        type: Number
     },
-    questionText : {
-        type : String
+    questionText: {
+        type: String
     },
-    options : [optionsSchema]
+    options: [optionsSchema]
 })
 
 
 const liveStreamContest = Schema({
 
-    masterDataId : {
-        type : Schema.Types.ObjectId,
-        ref : 'liveStreamMaster'
+    masterDataId: {
+        type: Schema.Types.ObjectId,
+        ref: 'liveStreamMaster'
     },
 
-    contestTitle : {
-        type : String,
-        ref : 'liveStreamMaster'
+    contestTitle: {
+        type: String,
+        ref: 'liveStreamMaster'
     },
 
-    contestNumber : {
-        type : Number
+    contestNumber: {
+        type: Number
     },
 
-    totalQues : {
-        type : Number
+    totalQues: {
+        type: Number
     },
 
-    startDate : {
-        type : Date
+    startDate: {
+        type: Date
     },
 
-    endDate : {
-        type : Date
+    endDate: {
+        type: Date
     },
 
-    questions : [questionSchema]
+    questions: [questionSchema]
 
-}, {versionKey : false, collection : "liveStreamContest"})
+}, { versionKey: false, collection: "liveStreamContest" })
 
 var liveStreamContestModel = mongoose.model("liveStreamContest", liveStreamContest)
 module.exports = liveStreamContestModel
