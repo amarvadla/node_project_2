@@ -33,7 +33,7 @@ var feeds = Schema({
     },
     likes: [likesSchema],
     comments: [commentsSchema]
-})
+},{ versionKey: false, collection: 'feeds' })
 
 feeds.methods.simpleObj = function () {
     var obj = this.toObject();
