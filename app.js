@@ -17,6 +17,8 @@ app.use('/rest/createMasterLiveStream' , require('./routes/createMasterLiveStrea
 app.use('/rest/createLiveStreamContest' , require('./routes/createLiveStreamContest'))
 app.use('/rest/getStreamDetails' , require('./routes/getLiveStreamDetails'))
 app.use('/rest/getContestQuestions' , require('./routes/getContestQuestions'))
+app.use('/rest/getTwitterFav' , require('./routes/getTwitterFav'))
+
 
 app.use(function (req, res, next) {
   let err = new Error('Not Found');
