@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
     // })
 
     schema.aggregate([
-        { $match: { _id: ObjectId("5d6a09d6226c5e0a081d4b9b") } },
+        { $match: { _id: ObjectId(input.contestId) } },
         { "$unwind": "$masterDataId" },
         { $lookup: { from: "liveStreamMaster", localField: "masterDataId", foreignField: "_id", as: "streamData" } },
         { "$unwind": "$streamData" },

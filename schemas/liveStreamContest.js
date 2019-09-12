@@ -24,6 +24,16 @@ const questionSchema = Schema({
     questionText: {
         type: String
     },
+    createdDate: {
+        type: Date,
+        default: Date.now
+    },
+    startDate: {
+        type: Date
+    },
+    endDate: {
+        type: Date
+    },
     options: [optionsSchema]
 })
 

@@ -18,6 +18,7 @@ app.use('/rest/createLiveStreamContest' , require('./routes/createLiveStreamCont
 app.use('/rest/getStreamDetails' , require('./routes/getLiveStreamDetails'))
 app.use('/rest/getContestQuestions' , require('./routes/getContestQuestions'))
 app.use('/rest/getTwitterFav' , require('./routes/getTwitterFav'))
+app.use('/rest/publishQuestion' , require('./routes/publishQuestion'))
 
 
 app.use(function (req, res, next) {
